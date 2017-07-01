@@ -14,6 +14,19 @@ def enumerate_sequence(n_proposition, initial_seg):
     else:
         return enumerate_sequence(n_proposition, initial_seg + 'P') + enumerate_sequence(n_proposition, initial_seg + 'O')
 
+def generate_random_sequence(n_propositions):
+    if n_propositions == 1:
+        return 'P'
+    seq = 'O'
+    while(len(seq) < 2*n_propositions - 2):
+        if seq.count('P') < seq.count('O') and seq.count('O') < n_propositions - 1:
+            seq += random.choice(['P','O'])
+        elif seq.count('P') == seq.count('O'):
+            seq += 'O'
+        elif seq.count('O') == n_propositions - 1:
+            seq += 'P'
+    return seq + 'P'
+
 # get a sub tree sequence from a legal sequence as is generated above
 def get_subtree_seq(sequence):
     length = 0
